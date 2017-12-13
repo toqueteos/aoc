@@ -22,14 +22,9 @@ def severity(guards):
     # return total
 
 def walk_undetected(guards):
-    mods = set([d % (2 * (r-1)) for d, r in guards])
-    mods.remove(0)
-    mods.remove(1)
-    delay_incr = min(*mods)
     delay = 0
     while any(caught_by_guard(delay+d, r) for d, r in guards):
-        # delay += 1 # check everything
-        delay += delay_incr
+        delay += 1 # check everything
     return delay
 
 example_input = (
