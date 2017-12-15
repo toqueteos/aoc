@@ -1,26 +1,8 @@
-def run(input, jump_fn):
-    lines = []
-    for line in input:
-        value = int(line.strip())
-        lines.append(value)
-    steps = jump_fn(lines)
-    print(steps)
-    # print(steps, lines)
-
-def jump_fn_part1(lines):
+def jump(lines, fn):
     length, pos, steps = len(lines), 0, 0
     while pos < length:
         next_pos = lines[pos]
-        lines[pos] += 1
-        pos += next_pos
-        steps += 1
-    return steps
-
-def jump_fn_part2(lines):
-    length, pos, steps = len(lines), 0, 0
-    while pos < length:
-        next_pos = lines[pos]
-        if next_pos >= 3:
+        if fn(next_pos):
             lines[pos] -= 1
         else:
             lines[pos] += 1
@@ -28,8 +10,20 @@ def jump_fn_part2(lines):
         steps += 1
     return steps
 
-# run(["0\n", "3\n", "0\n", "1\n", "-3\n"], jump_fn_part1)
-# run(["0\n", "3\n", "0\n", "1\n", "-3\n"], jump_fn_part2)
+def run(puzzle_input):
+    lines = []
+    for line in puzzle_input:
+        value = int(line.strip())
+        lines.append(value)
 
-run(file("input05.txt"), jump_fn_part1)
-run(file("input05.txt"), jump_fn_part2)
+    print(jump(list(lines), lambda pos: False))
+    print(jump(list(lines), lambda pos: pos >= 3))
+
+if __name__ == "__main__":
+    run(["0", "3", "0", "1", "-3"])
+    # 5
+    # 10
+
+    run(file("input05.txt"))
+    # 325922
+    # 24490906
