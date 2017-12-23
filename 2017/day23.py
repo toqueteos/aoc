@@ -41,7 +41,7 @@ def part1(program):
     return registers["mul_count"]
 
 
-def part2(program):
+def part2():
     h = 0
     # value of b is extracted from lines 1, 5, 6
     # value of c is extracted from lines 7, 8
@@ -59,7 +59,7 @@ def part2(program):
 def run(puzzle_input):
     program = parse_input(puzzle_input)
     print(part1(program))
-    print(part2(program))
+    print(part2())
 
 
 if __name__ == "__main__":
